@@ -1,4 +1,4 @@
-import AnythingLLMIcon from "@/assets/anything-llm-icon.svg";
+import chataiIcon from "@/assets/chatai-icon.png";
 import ChatService from "@/models/chatService";
 import {
   ArrowCounterClockwise,
@@ -45,15 +45,15 @@ export default function ChatWindowHeader({
 
   return (
     <div
-      style={{ borderBottom: "1px solid #E9E9E9" }}
+      style={{ borderBottom: "1px solid #E9E9E9", backgroundColor: settings.buttonColor }}
       className="allm-flex allm-items-center allm-relative allm-rounded-t-2xl"
       id="anything-llm-header"
     >
       <div className="allm-flex allm-justify-center allm-items-center allm-w-full allm-h-[76px]">
         <img
           style={{ maxWidth: 48, maxHeight: 48 }}
-          src={iconUrl ?? AnythingLLMIcon}
-          alt={iconUrl ? "Brand" : "AnythingLLM Logo"}
+          src={iconUrl ?? chataiIcon}
+          alt={iconUrl ? "Brand" : "Chatai Logo"}
         />
       </div>
       <div className="allm-absolute allm-right-0 allm-flex allm-gap-x-1 allm-items-center allm-px-[22px]">
@@ -62,7 +62,7 @@ export default function ChatWindowHeader({
             ref={buttonRef}
             type="button"
             onClick={() => setShowOptions(!showingOptions)}
-            className="allm-bg-transparent hover:allm-cursor-pointer allm-border-none hover:allm-bg-gray-100 allm-rounded-sm allm-text-slate-800/60"
+            className="allm-bg-transparent hover:allm-cursor-pointer allm-border-none hover:allm-bg-gray-600 allm-rounded-sm allm-text-gray-50"
             aria-label="Options"
           >
             <DotsThreeOutlineVertical size={20} weight="fill" />
@@ -71,7 +71,7 @@ export default function ChatWindowHeader({
         <button
           type="button"
           onClick={closeChat}
-          className="allm-bg-transparent hover:allm-cursor-pointer allm-border-none hover:allm-bg-gray-100 allm-rounded-sm allm-text-slate-800/60"
+          className="allm-bg-transparent hover:allm-cursor-pointer allm-border-none hover:allm-bg-gray-600 allm-rounded-sm allm-text-gray-50"
           aria-label="Close"
         >
           <X size={20} weight="bold" />

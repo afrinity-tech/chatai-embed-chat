@@ -1,11 +1,11 @@
 import React, { memo, forwardRef } from "react";
 import { Warning } from "@phosphor-icons/react";
 import renderMarkdown from "@/utils/chat/markdown";
-import { embedderSettings } from "@/main";
 import { v4 } from "uuid";
 import createDOMPurify from "dompurify";
-import AnythingLLMIcon from "@/assets/anything-llm-icon.svg";
+import chataiIcon from "@/assets/chatai-icon.png";
 import { formatDate } from "@/utils/date";
+import useGetScriptAttributes from "@/hooks/useScriptAttributes"; // Import the hook
 
 const DOMPurify = createDOMPurify(window);
 const HistoricalMessage = forwardRef(
@@ -21,8 +21,10 @@ const HistoricalMessage = forwardRef(
     },
     ref
   ) => {
-    const textSize = !!embedderSettings.settings.textSize
-      ? `allm-text-[${embedderSettings.settings.textSize}px]`
+    const settings = useGetScriptAttributes(); // Use the hook to get settings
+
+    const textSize = !!settings.textSize
+      ? `allm-text-[${settings.textSize}px]`
       : "allm-text-sm";
     if (error) console.error(`ANYTHING_LLM_CHAT_WIDGET_ERROR: ${error}`);
 
@@ -32,8 +34,7 @@ const HistoricalMessage = forwardRef(
           <div
             className={`allm-text-[10px] allm-text-gray-400 allm-ml-[54px] allm-mr-6 allm-mb-2 allm-text-left allm-font-sans`}
           >
-            {embedderSettings.settings.assistantName ||
-              "Anything LLM Chat Assistant"}
+            {settings.assistantName || "Anything LLM Chat Assistant"}
           </div>
         )}
         <div
@@ -45,7 +46,7 @@ const HistoricalMessage = forwardRef(
         >
           {role === "assistant" && (
             <img
-              src={embedderSettings.settings.assistantIcon || AnythingLLMIcon}
+              src={settings.assistantIcon || chataiIcon}
               alt="Anything LLM Icon"
               className="allm-w-9 allm-h-9 allm-flex-shrink-0 allm-ml-2 allm-mt-2"
               id="anything-llm-icon"
@@ -56,15 +57,15 @@ const HistoricalMessage = forwardRef(
               wordBreak: "break-word",
               backgroundColor:
                 role === "user"
-                  ? embedderSettings.USER_STYLES.msgBg
-                  : embedderSettings.ASSISTANT_STYLES.msgBg,
+                  ? settings.userBgColor
+                  : settings.assistantBgColor,
             }}
             className={`allm-py-[11px] allm-px-4 allm-flex allm-flex-col allm-font-sans ${
               error
                 ? "allm-bg-red-200 allm-rounded-lg allm-mr-[37px] allm-ml-[9px]"
                 : role === "user"
-                  ? `${embedderSettings.USER_STYLES.base} allm-anything-llm-user-message`
-                  : `${embedderSettings.ASSISTANT_STYLES.base} allm-anything-llm-assistant-message`
+                  ? `${settings.userBgColor} allm-anything-llm-user-message`
+                  : `${settings.assistantBgColor} allm-anything-llm-assistant-message`
             } allm-shadow-[0_4px_14px_rgba(0,0,0,0.25)]`}
           >
             <div className="allm-flex">
