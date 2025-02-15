@@ -4,11 +4,9 @@ import renderMarkdown from "@/utils/chat/markdown";
 import { embedderSettings } from "@/main";
 import  chataiIcon from "@/assets/chatai-icon.png";
 import { formatDate } from "@/utils/date";
-import useGetScriptAttributes from "@/hooks/useScriptAttributes"; // Import the hook
 
 const PromptReply = forwardRef(
-  ({ uuid, reply, pending, error, sources = [], sentAt }, ref) => {
-    const settings = useGetScriptAttributes(); 
+  ({ uuid, reply, pending, error, sources = [], sentAt, settings }, ref) => { // Receive settings as props
 
     if (!reply && sources.length === 0 && !pending && !error) return null;
     if (error) console.error(`CHATAI_WIDGET_ERROR: ${error}`);

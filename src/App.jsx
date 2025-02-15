@@ -15,7 +15,7 @@ export default function App() {
     if (embedSettings.openOnLoad === "on") {
       toggleOpenChat(true);
     }
-  }, [embedSettings.loaded]);
+  }, [embedSettings.openOnLoad, toggleOpenChat]);
 
   if (!embedSettings.loaded) return null;
 

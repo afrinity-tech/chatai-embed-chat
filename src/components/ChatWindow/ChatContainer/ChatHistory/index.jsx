@@ -81,6 +81,7 @@ export default function ChatHistory({ settings = {}, history = [] }) {
               sources={props.sources}
               error={props.error}
               closed={props.closed}
+              settings={settings} // Pass settings down
             />
           );
         }
@@ -97,6 +98,7 @@ export default function ChatHistory({ settings = {}, history = [] }) {
             feedbackScore={props.feedbackScore}
             error={props.error}
             errorMsg={props.errorMsg}
+            settings={settings} // Pass settings down
           />
         );
       })}

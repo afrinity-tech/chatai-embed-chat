@@ -115,7 +115,7 @@ export default function ChatContainer({
     }
 
     loadingResponse === true && fetchReply();
-  }, [loadingResponse, chatHistory]);
+  }, [loadingResponse, chatHistory, settings, sessionId]); // Added settings as dependency
 
   const handleAutofillEvent = (event) => {
     if (!event.detail.command) return;
@@ -141,6 +141,7 @@ export default function ChatContainer({
         inputDisabled={loadingResponse}
         buttonDisabled={loadingResponse}
       />
+      
     </div>
   );
 }

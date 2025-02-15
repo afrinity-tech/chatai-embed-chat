@@ -1,3 +1,4 @@
+
 export default function Sponsor({ settings }) {
   if (!!settings.noSponsor) return null;
 

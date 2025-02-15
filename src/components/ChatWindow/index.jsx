@@ -5,12 +5,20 @@ import ChatContainer from "./ChatContainer";
 import Sponsor from "../Sponsor";
 import { ChatHistoryLoading } from "./ChatContainer/ChatHistory";
 import ResetChat from "../ResetChat";
+import { useEffect } from "react";
 
 export default function ChatWindow({ closeChat, settings, sessionId }) {
   const { chatHistory, setChatHistory, loading } = useChatHistory(
     settings,
     sessionId
   );
+
+  useEffect(() => {
+    // set the chat history when is change, and pass the setting down
+    setChatHistory(chatHistory => {
+      return chatHistory;
+    });
+  }, [chatHistory]);
 
   if (loading) {
     return (
@@ -42,13 +50,11 @@ export default function ChatWindow({ closeChat, settings, sessionId }) {
         closeChat={closeChat}
         setChatHistory={setChatHistory}
       />
-      <div className="allm-flex-grow allm-overflow-y-auto">
-        <ChatContainer
-          sessionId={sessionId}
-          settings={settings}
-          knownHistory={chatHistory}
-        />
-      </div>
+      <ChatContainer
+        sessionId={sessionId}
+        settings={settings}
+        knownHistory={chatHistory}
+      />
       <div className="allm-mt-4 allm-pb-4 allm-h-fit allm-gap-y-2 allm-z-10">
         <Sponsor settings={settings} />
         <ResetChat

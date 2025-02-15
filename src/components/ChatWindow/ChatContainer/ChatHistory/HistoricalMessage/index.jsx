@@ -5,7 +5,6 @@ import { v4 } from "uuid";
 import createDOMPurify from "dompurify";
 import chataiIcon from "@/assets/chatai-icon.png";
 import { formatDate } from "@/utils/date";
-import useGetScriptAttributes from "@/hooks/useScriptAttributes"; // Import the hook
 
 const DOMPurify = createDOMPurify(window);
 const HistoricalMessage = forwardRef(
@@ -18,11 +17,10 @@ const HistoricalMessage = forwardRef(
       error = false,
       errorMsg = null,
       sentAt,
+      settings, // Receive settings as props
     },
     ref
   ) => {
-    const settings = useGetScriptAttributes(); // Use the hook to get settings
-
     const textSize = !!settings.textSize
       ? `allm-text-[${settings.textSize}px]`
       : "allm-text-sm";

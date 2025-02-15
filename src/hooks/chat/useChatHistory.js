@@ -21,7 +21,7 @@ export default function useChatHistory(settings = null, sessionId = null) {
       }
     }
     fetchChatHistory();
-  }, [sessionId, settings]);
+  }, [sessionId, settings]); // Ensure useEffect depends on settings
 
   return { chatHistory: messages, setChatHistory: setMessages, loading };
 }
