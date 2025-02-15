@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { embedderSettings } from "../main";
 
-const HARDCODED_BEARER_TOKEN = '5VB9RNY-HNMM6FN-MRAVBXG-K4B69J7'; // Replace with your actual token
+const HARDCODED_BEARER_TOKEN = 'QN0F9ZX-BBJ4YZA-J64RB6H-G9D05P8'; // Replace with your actual token
 
 const DEFAULT_SETTINGS = {
   embedId: null,
@@ -14,8 +14,8 @@ const DEFAULT_SETTINGS = {
   brandImageUrl: null,
   greeting: null,
   buttonColor: "#262626",
-  userBgColor: "#2C2F35",
-  assistantBgColor: "#2563eb",
+  userBgColor: null,
+  assistantBgColor: null,
   noSponsor: false,
   sponsorText: "Powered by Chatai",
   sponsorLink: "https://chatai.afrainity.com",
