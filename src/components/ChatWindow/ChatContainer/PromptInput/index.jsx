@@ -97,6 +97,7 @@ export default function PromptInput({
           </div>
         </div>
       </form>
+      
     </div>
   );
 }

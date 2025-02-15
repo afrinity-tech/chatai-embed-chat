@@ -8,16 +8,16 @@ import { useEffect } from "react";
 
 export default function App() {
   const { isChatOpen, toggleOpenChat } = useOpenChat();
-  const embedSettings = useGetScriptAttributes();
+  const settings = useGetScriptAttributes();
   const sessionId = useSessionId();
 
   useEffect(() => {
-    if (embedSettings.openOnLoad === "on") {
+    if (settings.openOnLoad === "on") {
       toggleOpenChat(true);
     }
-  }, [embedSettings.openOnLoad, toggleOpenChat]);
+  }, [settings.openOnLoad, toggleOpenChat]);
 
-  if (!embedSettings.loaded) return null;
+  if (!settings.loaded) return null;
 
   const positionClasses = {
     "bottom-left": "allm-bottom-0 allm-left-0 allm-ml-4",
@@ -26,9 +26,9 @@ export default function App() {
     "top-right": "allm-top-0 allm-right-0 allm-mr-4 allm-mt-4",
   };
 
-  const position = embedSettings.position || "bottom-right";
-  const windowWidth = embedSettings.windowWidth ?? "400px";
-  const windowHeight = embedSettings.windowHeight ?? "700px";
+  const position = settings.position || "bottom-right";
+  const windowWidth = settings.windowWidth ?? "400px";
+  const windowHeight = settings.windowHeight ?? "600px";
 
   return (
     <>
@@ -41,6 +41,7 @@ export default function App() {
           style={{
             maxWidth: windowWidth,
             maxHeight: windowHeight,
+            height: windowHeight,
           }}
           className={`allm-h-full allm-w-full allm-bg-white allm-fixed allm-bottom-0 allm-right-0 allm-mb-4 allm-md:mr-4 allm-rounded-2xl allm-border allm-border-gray-300 allm-shadow-[0_4px_14px_rgba(0,0,0,0.25)] ${positionClasses[position]}`}
           id="anything-llm-chat"
@@ -48,7 +49,7 @@ export default function App() {
           {isChatOpen && (
             <ChatWindow
               closeChat={() => toggleOpenChat(false)}
-              settings={embedSettings}
+              settings={settings}
               sessionId={sessionId}
             />
           )}
@@ -60,7 +61,7 @@ export default function App() {
           className={`allm-fixed allm-bottom-0 ${positionClasses[position]} allm-mb-4 allm-z-50`}
         >
           <OpenButton
-            settings={embedSettings}
+            settings={settings}
             isOpen={isChatOpen}
             toggleOpen={() => toggleOpenChat(true)}
           />

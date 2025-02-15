@@ -115,7 +115,7 @@ export default function ChatContainer({
     }
 
     loadingResponse === true && fetchReply();
-  }, [loadingResponse, chatHistory, settings, sessionId]); // Added settings as dependency
+  }, [loadingResponse, chatHistory]);
 
   const handleAutofillEvent = (event) => {
     if (!event.detail.command) return;

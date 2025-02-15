@@ -2,7 +2,6 @@ import HistoricalMessage from "./HistoricalMessage";
 import PromptReply from "./PromptReply";
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown, CircleNotch } from "@phosphor-icons/react";
-import { embedderSettings } from "@/main";
 import debounce from "lodash.debounce";
 import { SEND_TEXT_EVENT } from "..";
 
@@ -45,11 +44,15 @@ export default function ChatHistory({ settings = {}, history = [] }) {
       });
     }
   };
-
   if (history.length === 0) {
     return (
-      <div className="allm-pb-[100px] allm-pt-[5px] allm-rounded-lg allm-px-2 allm-h-full allm-mt-2 allm-gap-y-2 allm-overflow-y-scroll allm-flex allm-flex-col allm-justify-start allm-no-scroll">
+      <div className="allm-pb-[50px] allm-pt-[5px] allm-rounded-lg allm-px-2 allm-h-full allm-mt-2 allm-gap-y-2 allm-overflow-y-scroll allm-flex allm-flex-col allm-justify-start allm-no-scroll">
         <div className="allm-flex allm-h-full allm-flex-col allm-items-center allm-justify-center">
+          <img
+            src={settings?.welcomeGif || "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDJ3cm50Y3ExOWF1NXdnbzFiMjR2NmRzZnB0MXE0cWhhbG41NjB6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/bcKmIWkUMCjVm/giphy.gif"}
+            alt="Welcome"
+            className="allm-w-24 allm-h-24 allm-mb-4 allm-rounded-full allm-shadow-lg allm-animate-bounce"
+          />
           <p className="allm-text-slate-400 allm-text-sm allm-font-sans allm-py-4 allm-text-center">
             {settings?.greeting ?? "Send a chat to get started."}
           </p>
@@ -58,13 +61,14 @@ export default function ChatHistory({ settings = {}, history = [] }) {
       </div>
     );
   }
+  
 
   return (
     <div
-      className="allm-pb-[30px] allm-pt-[5px] allm-rounded-lg allm-px-2 allm-h-full allm-gap-y-2 allm-overflow-y-scroll allm-flex allm-flex-col allm-justify-start allm-no-scroll allm-md:max-h-[500px]"
-      id="chat-history"
-      ref={chatHistoryRef}
-    >
+    className="allm-pt-[5px] allm-rounded-lg allm-px-2 allm-gap-y-2 allm-overflow-y-scroll allm-flex allm-flex-col allm-justify-start allm-no-scroll" // Removed allm-h-full
+    id="chat-history"
+    ref={chatHistoryRef}
+  >
       {history.map((props, index) => {
         const isLastMessage = index === history.length - 1;
         const isLastBotReply =
@@ -147,7 +151,7 @@ function SuggestedMessages({ settings }) {
           style={{
             opacity: 0,
             wordBreak: "break-word",
-            backgroundColor: embedderSettings.USER_STYLES.msgBg,
+            backgroundColor: settings.buttonColor,
             fontSize: settings.textSize,
           }}
           type="button"

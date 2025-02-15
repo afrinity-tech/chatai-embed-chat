@@ -50,18 +50,15 @@ export default function ChatWindow({ closeChat, settings, sessionId }) {
         closeChat={closeChat}
         setChatHistory={setChatHistory}
       />
-      <ChatContainer
-        sessionId={sessionId}
-        settings={settings}
-        knownHistory={chatHistory}
-      />
-      <div className="allm-mt-4 allm-pb-4 allm-h-fit allm-gap-y-2 allm-z-10">
+ <div className="allm-h-[calc(100%-7rem)] allm-overflow-hidden">
+  <ChatContainer
+    sessionId={sessionId}
+    settings={settings}
+    knownHistory={chatHistory}
+  />
+</div>
+      <div className="allm-mt-2 allm-pb-1 allm-h-fit allm-gap-y-2 allm-z-10">
         <Sponsor settings={settings} />
-        <ResetChat
-          setChatHistory={setChatHistory}
-          settings={settings}
-          sessionId={sessionId}
-        />
       </div>
     </div>
   );

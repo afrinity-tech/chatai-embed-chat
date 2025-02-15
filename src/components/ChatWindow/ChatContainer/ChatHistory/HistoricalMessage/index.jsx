@@ -1,5 +1,5 @@
 import React, { memo, forwardRef } from "react";
-import { Warning } from "@phosphor-icons/react";
+import { Warning, User } from "@phosphor-icons/react";
 import renderMarkdown from "@/utils/chat/markdown";
 import { v4 } from "uuid";
 import createDOMPurify from "dompurify";
@@ -17,7 +17,7 @@ const HistoricalMessage = forwardRef(
       error = false,
       errorMsg = null,
       sentAt,
-      settings, // Receive settings as props
+      settings,
     },
     ref
   ) => {
@@ -27,7 +27,7 @@ const HistoricalMessage = forwardRef(
     if (error) console.error(`ANYTHING_LLM_CHAT_WIDGET_ERROR: ${error}`);
 
     return (
-      <div className="py-[5px]">
+      <div className="allm-py-[5px]">
         {role === "assistant" && (
           <div
             className={`allm-text-[10px] allm-text-gray-400 allm-ml-[54px] allm-mr-6 allm-mb-2 allm-text-left allm-font-sans`}
@@ -45,7 +45,7 @@ const HistoricalMessage = forwardRef(
           {role === "assistant" && (
             <img
               src={settings.assistantIcon || chataiIcon}
-              alt="Anything LLM Icon"
+              alt="Assistant Icon"
               className="allm-w-9 allm-h-9 allm-flex-shrink-0 allm-ml-2 allm-mt-2"
               id="anything-llm-icon"
             />
@@ -58,18 +58,18 @@ const HistoricalMessage = forwardRef(
                   ? settings.userBgColor
                   : settings.assistantBgColor,
             }}
-            className={`allm-py-[11px] allm-px-4 allm-flex allm-flex-col allm-font-sans ${
+            className={`allm-py-[11px] allm-px-4 allm-flex allm-flex-col allm-font-sans allm-mx-2 ${
               error
-                ? "allm-bg-red-200 allm-rounded-lg allm-mr-[37px] allm-ml-[9px]"
+                ? "allm-bg-red-200 allm-rounded-[20px] allm-mr-[37px] allm-ml-[9px]"
                 : role === "user"
-                  ? `${settings.userBgColor} allm-anything-llm-user-message`
-                  : `${settings.assistantBgColor} allm-anything-llm-assistant-message`
-            } allm-shadow-[0_4px_14px_rgba(0,0,0,0.25)]`}
+                ? `${settings.userBgColor} allm-anything-llm-user-message allm-rounded-[20px_20px_0_20px]`
+                : `${settings.assistantBgColor} allm-anything-llm-assistant-message allm-rounded-[20px_20px_20px_0]`
+            } allm-shadow-[0_4px_14px_rgba(0,0,0,0.15)]`}
           >
             <div className="allm-flex">
               {error ? (
                 <div className="allm-p-2 allm-rounded-lg allm-bg-red-50 allm-text-red-500">
-                  <span className={`allm-inline-block `}>
+                  <span className={`allm-inline-block`}>
                     <Warning className="allm-h-4 allm-w-4 allm-mb-1 allm-inline-block" />{" "}
                     Could not respond to message.
                   </span>
@@ -87,11 +87,22 @@ const HistoricalMessage = forwardRef(
               )}
             </div>
           </div>
+          {role === "user" && (
+            <div className="allm-w-9 allm-h-9 allm-flex-shrink-0 allm-mr-2 allm-mt-2 allm-flex allm-items-center allm-justify-center allm-bg-blue-500 allm-rounded-full allm-shadow-md">
+              <User 
+                className="allm-text-white" 
+                weight="fill" 
+                size={24} 
+                alt="User Icon"
+              />
+            </div>
+          )}
         </div>
-
         {sentAt && (
           <div
-            className={`allm-font-sans allm-text-[10px] allm-text-gray-400 allm-ml-[54px] allm-mr-6 allm-mt-2 ${role === "user" ? "allm-text-right" : "allm-text-left"}`}
+            className={`allm-font-sans allm-text-[10px] allm-text-gray-400 allm-ml-[54px] allm-mr-6 allm-mt-2 ${
+              role === "user" ? "allm-text-right" : "allm-text-left"
+            }`}
           >
             {formatDate(sentAt)}
           </div>
