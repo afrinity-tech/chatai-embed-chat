@@ -152,7 +152,7 @@ function SuggestedMessages({ settings }) {
           style={{
             opacity: 0,
             wordBreak: "break-word",
-            backgroundColor: embedderSettings.USER_STYLES.msgBg,
+            backgroundColor: settings.buttonColor,
             fontSize: settings.textSize,
           }}
           type="button"
