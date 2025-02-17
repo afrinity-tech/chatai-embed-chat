@@ -80,7 +80,7 @@ export default function useGetScriptAttributes() {
         const mappedSettings = {
           ...DEFAULT_SETTINGS,
           // Prioritize script-tag defined settings.
-          ...embedderSettings.settings,
+        
           // Override with API values where available.
           embedId: correctedEmbedId, // Use the corrected embedId
           prompt: apiSettings.prompt !== undefined ? apiSettings.prompt : embedderSettings.settings.prompt,
@@ -106,6 +106,8 @@ export default function useGetScriptAttributes() {
           username: apiSettings.username !== undefined ? apiSettings.username : embedderSettings.settings.username,
           defaultMessages: apiSettings.defaultMessages !== undefined ? apiSettings.defaultMessages : embedderSettings.settings.defaultMessages,
           bearerToken, // Always use the determined bearerToken
+
+          ...embedderSettings.settings,
         };
 
 

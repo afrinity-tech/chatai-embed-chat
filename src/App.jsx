@@ -35,7 +35,13 @@ export default function App() {
       <Head />
       <div
         id="anything-llm-embed-chat-container"
-        className={`allm-fixed allm-inset-0 allm-z-50 ${isChatOpen ? "allm-block" : "allm-hidden"}`}
+        style={{
+          maxWidth: windowWidth,
+          maxHeight: windowHeight,
+          height: windowHeight,
+        }}
+        className={`allm-fixed ${positionClasses[position]} allm-z-50 ${isChatOpen ? "allm-block" : "allm-hidden"
+          }`}
       >
         <div
           style={{
